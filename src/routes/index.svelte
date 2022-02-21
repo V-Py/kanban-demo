@@ -29,11 +29,9 @@
     let categories_list;
 
     if(data) {
-        console.log('DATA',data);   
+        // console.log('DATA',data);   
         const props = data[0];
-        // colsList = JSON.parse(props.columns);
-        colsList = [{name:'Test', cards:[]}];
-        // categories_list = props.categories;
+        colsList = JSON.parse(props.columns);
     }
 
     function testFunction(){
