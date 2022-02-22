@@ -6,6 +6,7 @@ export async function signIn(email) {
     const { user, error } = await supabase.auth.signIn({
         email
     });
+    return { data: !error, error };
 }
 export async function signOut() {
     const { error } = await supabase.auth
@@ -17,18 +18,17 @@ export async function signInWithGithub() {
         provider: 'github',
     });
 }
-// export async function saveGanttProperties(){
-//     const {first_name, last_name, gender='undefined', birth_date='1901-01-01'} = userInfos;
-//     const full_name = `${first_name} ${last_name}`;
-//     console.log('ADD USER INFOS FUNCTION', uid, 'USER INFOS', userInfos);
-//     const { data, error } = await supabase
-//     .from('profiles')
-//     .update({ first_name, last_name, full_name, birth_date, gender})
-//     .eq('uid', uid )
-//     console.log('RESULT UPDATE', data);
-//     console.log('ERROR UPDATE', error);
-//     return {data, error}
-// }
+export async function saveGanttProperties({ uid, ganttProperties }) {
+    const { columns = 'NULL', categories = 'NULL', props = 'NULL' } = ganttProperties;
+    console.log('ADD USER INFOS FUNCTION', uid, 'USER INFOS', ganttProperties, 'COLUMNS', columns, 'categories', categories, 'props', props);
+    const { data, error } = await supabase
+        .from('gantt_props')
+        .update({ columns, categories, props })
+        .eq('uid', uid);
+    console.log('RESULT UPDATE', data);
+    console.log('ERROR UPDATE', error);
+    return { data, error };
+}
 export async function getGanttProperties() {
     let { data, error } = await supabase
         .from('gantt_props')
