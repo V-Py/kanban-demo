@@ -80,7 +80,7 @@
             <button class="cust-button primary" on:click={() => {handleSign()}}>Send Magic link</button>
             <button class="cust-button github" on:click={() => {signInWithGithub()}}>
                 Connect with GitHub&nbsp
-                <img height="16px" width="16px" src="/static/github.svg" alt="">
+                <img height="16px" width="16px" src="github.svg" alt="">
             </button>
         {:else}
             {#if mailSent}
