@@ -19,7 +19,6 @@
     import Kanban from 'svelte-kanban';
     import {signIn, signInWithGithub, signOut, getUser, saveGanttProperties} from '$lib/services';
     import { onMount } from 'svelte';
-
     export let data, error;
 
     let email ='';
@@ -32,12 +31,8 @@
     let mailSent = false;
     let loading = false;
 
-    if(data) {
-        // console.log('DATA',data);   
-        const props = data[0];
-        colsList = JSON.parse(props.columns);
-    }
-
+    if(data && data.length > 0) colsList = JSON.parse(data[0].columns); // Init with DB 
+ 
     async function saveProps(e){
         if(!user || !user.id) return;
         loading = true;
@@ -63,9 +58,7 @@
 
     async function handleSign(){
         idle = false;
-        console.log('WE WILL SIGN IN');
         const res = await signIn(email);
-        console.log('RES SIGN IN', res);
         if(!data){idle = true; alert('Error while sending the email to '+email); return;}
         mailSent = true;
     }
