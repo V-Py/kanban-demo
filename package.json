@@ -21,6 +21,6 @@
   "type": "module",
   "dependencies": {
     "@supabase/supabase-js": "^1.30.5",
-    "svelte-kanban": "0.0.914"
+    "svelte-kanban": "0.0.915"
   }
 }

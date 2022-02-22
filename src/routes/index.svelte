@@ -72,13 +72,16 @@
 
 <div style="width:100%;display:flex;justify-content:center;align-items:center;">
     {#if connected}
-        <button on:click={() => {signOut(); user=null; connected=false;}}>Sign-out</button>
+        <button class="cust-button primary" on:click={() => {signOut(); user=null; connected=false;}}>Sign-out</button>
     {:else}
 
         {#if idle}
-            <input id="magic-email" style="width:200px; margin:0 20px;" type="text" bind:value={email} placeholder="example@mail.com" />
-            <button on:click={() => {handleSign()}}>Send Magic link</button>
-            <button on:click={() => {signInWithGithub()}}>GitHub</button>
+            <input id="magic-email" style="width:150px; margin:0 20px;" type="text" bind:value={email} placeholder="example@mail.com" />
+            <button class="cust-button primary" on:click={() => {handleSign()}}>Send Magic link</button>
+            <button class="cust-button github" on:click={() => {signInWithGithub()}}>
+                Connect with GitHub&nbsp
+                <img height="16px" width="16px" src="/static/github.svg" alt="">
+            </button>
         {:else}
             {#if mailSent}
                 <div>Email sent with success to <b>{email}</b> !</div>
@@ -144,11 +147,52 @@
         animation-delay: -0.15s;
     }
     @keyframes lds-ring {
-    0% {
-        transform: rotate(0deg);
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
-    100% {
-        transform: rotate(360deg);
+
+    .cust-button{
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: 0.375rem 0.375rem;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
+
+    .primary{
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .primary:hover{
+        cursor:pointer;
+        background-color:#005abb;
+        border-color:#005abb;
+    }
+
+    .github{
+        margin-left:10px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:white;
+        border:1px solid rgba(0,0,0,0.1);
+    }
+
+    .github:hover{
+        cursor:pointer;
+        background-color:rgba(0,0,0,0.1)
     }
 </style>
