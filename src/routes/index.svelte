@@ -36,7 +36,7 @@
     let mailSent = false;
     let loading = false;
 
-    if(data && data.length > 0) colsList = JSON.parse(data[0].columns); // Init with DB 
+    if(data && data.length > 0 && data[0].columns) colsList = JSON.parse(data[0].columns); // Init with DB 
  
     async function saveProps(e){
         if(!user || !user.id) return;
