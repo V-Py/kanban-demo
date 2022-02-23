@@ -2,6 +2,11 @@
     import {getGanttProperties} from '$lib/services';
 
     export async function load({url, params, fetch, session, context}){
+
+
+        let userTemp = getUser();
+        console.log('USER TEMP', userTemp);
+
         const {data, error} = await getGanttProperties();
         console.log('DATA', data);
         console.log('ERROR', error);
