@@ -21,6 +21,7 @@
   "type": "module",
   "dependencies": {
     "@supabase/supabase-js": "^1.30.5",
-    "svelte-kanban": "0.0.915"
+    "svelte-kanban": "0.0.915",
+    "svelte-material-color-picker": "0.0.1"
   }
 }
