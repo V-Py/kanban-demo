@@ -1,16 +1,10 @@
 <script context="module">
-    import {getGanttProperties} from '$lib/services';
-
+    import {getKanbanProps} from '$lib/services';
     export async function load({url, params, fetch, session, context}){
-
-
         let userTemp = getUser();
         console.log('USER TEMP', userTemp);
 
-        const {data, error} = await getGanttProperties();
-        console.log('DATA', data);
-        console.log('ERROR', error);
-
+        const {data, error} = await getKanbanProps();
         return{
             props:{
                 data,
@@ -35,6 +29,7 @@
     let idle = true;
     let mailSent = false;
     let loading = false;
+    let theme = 'light';
 
     if(data && data.length > 0 && data[0].columns) colsList = JSON.parse(data[0].columns); // Init with DB 
  
@@ -68,14 +63,13 @@
         mailSent = true;
     }
 
-
     onMount(async ()=>{
         user = getUser();
         if(user) connected = true;
     })
 </script>
 
-<div style="width:100%;display:flex;justify-content:center;align-items:center;">
+<div class="header {theme}">
     {#if connected}
         <button class="cust-button primary" on:click={() => {signOut(); user=null; connected=false;}}>Sign-out</button>
     {:else}
@@ -102,6 +96,7 @@
         </div>
      {/if}
 </div>
+
 <div style="width:100%; height:600px;">
     <Kanban
         on:columnAdd={saveProps}
@@ -114,6 +109,7 @@
         on:moveCardDown={saveProps}
         {colsList}
         {categories_list}
+        {theme}
     />
 </div>
 
@@ -121,6 +117,29 @@
 <style>
     *{
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    body, html{
+		width:100%;
+		height:100%;
+		background:yellow !important;
+		margin:0;
+		padding:0;
+	}
+
+    .header{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    
+    .header.light{
+        background:#fff;
+    }
+
+    .header.dark{
+        background:var(--dark-bg);
     }
 
     .lds-ring {

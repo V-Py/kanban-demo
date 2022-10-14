@@ -33,7 +33,7 @@ export async function saveGanttProperties({uid, ganttProperties}){
     return {data, error}
 }
 
-export async function getGanttProperties(){
+export async function getKanbanProps(){
     let {data, error} = await supabase
     .from('gantt_props')
     .select('*')

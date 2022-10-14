@@ -3,12 +3,21 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="description" content="" />
-		<link rel="icon" href="%svelte.assets%/favicon.png" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Demo</title>
-		%svelte.head%
+		%sveltekit.head%
 	</head>
 	<body>
-		<div id="svelte">%svelte.body%</div>
+		%sveltekit.body%
 	</body>
 </html>
+
+<style>
+	:global(body) { /* this will apply to <body> */ margin: 0; padding: 0; }
+
+	html, body{
+		width:100%;
+		height:100%;
+	}
+</style>

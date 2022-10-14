@@ -20,16 +20,13 @@ export async function signInWithGithub() {
 }
 export async function saveGanttProperties({ uid, ganttProperties }) {
     const { columns = 'NULL', categories = 'NULL', props = 'NULL' } = ganttProperties;
-    console.log('ADD USER INFOS FUNCTION', uid, 'USER INFOS', ganttProperties, 'COLUMNS', columns, 'categories', categories, 'props', props);
     const { data, error } = await supabase
         .from('gantt_props')
         .update({ columns, categories, props })
         .eq('uid', uid);
-    console.log('RESULT UPDATE', data);
-    console.log('ERROR UPDATE', error);
     return { data, error };
 }
-export async function getGanttProperties() {
+export async function getKanbanProps() {
     let { data, error } = await supabase
         .from('gantt_props')
         .select('*')
